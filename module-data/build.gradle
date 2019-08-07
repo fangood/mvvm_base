@@ -69,39 +69,30 @@ android {
         targetCompatibility versions.targetCompatibility
         sourceCompatibility versions.sourceCompatibility
     }
-    //int DEBUG = 0;//0测试，1仿真，2正式, 3开发
     buildTypes {
         debug {
 
-            buildConfigField "String", "BASE_URL", '"http://192.168.1.119:8000"'
+            buildConfigField "String", "BASE_URL", "http://192.168.1.119:8000"
             //是否可抓包
             buildConfigField "boolean", "PROXY_ENABLE", 'true'
             buildConfigField "String", "SERVER_PUBLIC_KEY", "$testServerPublicKey"
-            //极光（外网）
-            buildConfigField "String", "APP_PUSH_URL", '"http://222.66.113.90:58706/qkMessagePushProvider"'
         }
         fortest {
             buildConfigField "boolean", "PROXY_ENABLE", 'true'
             buildConfigField "String", "SERVER_PUBLIC_KEY", "$testServerPublicKey"
-            buildConfigField "String", "BASE_URL", '"http://192.168.1.147:8000"'
-            //极光（外网）
-            buildConfigField "String", "APP_PUSH_URL", '"http://222.66.113.90:58706/qkMessagePushProvider"'
+            buildConfigField "String", "BASE_URL", "http://192.168.1.147:8000"
             consumerProguardFiles 'proguard-rules.pro'
         }
         simulation {
             buildConfigField "boolean", "PROXY_ENABLE", 'false'
             buildConfigField "String", "SERVER_PUBLIC_KEY", "$testServerPublicKey"
-            buildConfigField "String", "BASE_URL", '"http://172.17.0.64:8000"'
-            //极光（外网）
-            buildConfigField "String", "APP_PUSH_URL", '"http://192.168.1.156:8585/qkMessagePushProvider"'
+            buildConfigField "String", "BASE_URL", "http://172.17.0.64:8000"
             consumerProguardFiles 'proguard-rules.pro'
         }
         release {
             buildConfigField "boolean", "PROXY_ENABLE", 'false'
             buildConfigField "String", "SERVER_PUBLIC_KEY", "$releaseServerPublicKey"
-            buildConfigField "String", "BASE_URL", '"http://192.168.1.147:8000"'
-            //极光（外网）
-            buildConfigField "String", "APP_PUSH_URL", '"http://58.215.175.243:8585/qkMessagePushProvider"'
+            buildConfigField "String", "BASE_URL", "http://192.168.1.147:8000"
             consumerProguardFiles 'proguard-rules.pro'
         }
     }

@@ -1,6 +1,5 @@
 package com.zj.th.data.remote.service;
 
-import com.zj.th.data.remote.BuildConfig;
 import com.zj.th.data.remote.contacts.FriendBean;
 import com.zj.th.data.remote.message.MessageBean;
 import com.zj.th.data.remote.order.City;
@@ -140,7 +139,7 @@ public interface BaseService {
      * @param map
      * @return
      */
-    @POST(BuildConfig.APP_PUSH_URL + "/security/getToken")
+    @POST(BASE_URL + "/security/getToken")
     Observable<ApiJavaResult<String>> getPushToken(@Body HashMap<String, String> map);
 
     /**
@@ -149,7 +148,7 @@ public interface BaseService {
      * @param map
      * @return
      */
-    @POST(BuildConfig.APP_PUSH_URL + "/message/queryUserMessageList")
+    @POST(BASE_URL + "/message/queryUserMessageList")
     Observable<ApiJavaResult<List<MessageBean>>> queryMessages(@Body HashMap<String, String> map);
 
     /**
@@ -158,7 +157,7 @@ public interface BaseService {
      * @param map
      * @return
      */
-    @POST(BuildConfig.APP_PUSH_URL + "/message/updateMessageUserRange")
+    @POST(BASE_URL + "/message/updateMessageUserRange")
     Observable<ApiJavaResult<String>> updateReadMsg(@Body HashMap<String, String> map);
 
 
