@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.zj.th.user.login.LoginViewModel" />
+
+        <variable
+            name="smsCodeViewModel"
+            type="com.zj.th.user.register.SmsCodeViewModel" />
+
+        <variable
+            name="passwordViewModel"
+            type="com.zj.th.user.register.PasswordViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        android:orientation="vertical"
+        android:background="@color/color_bg"
+        tools:context=".login.LoginActivity">
+
+        <com.zj.th.base.widget.TitleBar
+            android:id="@+id/login_title"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/title_height"
+            android:layout_alignParentTop="true"
+            android:background="@android:color/transparent"
+            app:leftIcon="@mipmap/user_ic_close"
+            app:leftMinWidth="@dimen/title_height"
+            app:leftType="icon">
+
+        </com.zj.th.base.widget.TitleBar>
+
+        <RelativeLayout
+            android:id="@+id/login_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/login_title"
+            android:layout_marginTop="60dp">
+
+            <LinearLayout
+                android:id="@+id/login_password_login_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/login_title"
+                    android:text="手机号登录"
+                    android:textColor="@color/colorTextPrimary"
+                    android:textSize="22sp" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="40dp">
+
+                    <TextView
+                        android:id="@+id/login_country_code"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:minWidth="50dp"
+                        android:padding="10dp"
+                        android:text="+86"
+                        android:textColor="@color/colorTextPrimary"
+                        android:textSize="14sp" />
+
+                    <View
+                        android:layout_width="2dp"
+                        android:layout_height="28dp"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@id/login_country_code"
+                        android:background="#c8c8c8" />
+
+                    <ImageView
+                        android:id="@+id/login_phone_clear"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:padding="10dp"
+                        android:src="@mipmap/user_ic_edit_clear"
+                        app:clickCommand="@{smsCodeViewModel.clearPhoneCommand}" />
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_toLeftOf="@id/login_phone_clear"
+                        android:layout_toRightOf="@id/login_country_code"
+                        android:background="@android:color/transparent"
+                        android:hint="请填写手机号"
+                        android:inputType="number"
+                        android:maxLines="1"
+                        android:padding="10dp"
+                        android:text="@={smsCodeViewModel.phone}"
+                        android:textColor="@color/colorTextPrimary"
+                        android:textColorHint="@color/colorTextThirdly"
+                        android:textSize="14sp" />
+
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="#c8c8c8" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/login_password_lable"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:gravity="center"
+                        android:minWidth="50dp"
+                        android:padding="10dp"
+                        android:text="密码"
+                        android:textColor="@color/colorTextPrimary"
+                        android:textSize="14sp" />
+
+                    <CheckBox
+                        android:id="@+id/login_password_status"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:button="@null"
+                        android:checked="@={passwordViewModel.visible}"
+                        android:drawableLeft="@drawable/user_bg_cb_password_status_selector"
+                        android:padding="10dp" />
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_toLeftOf="@id/login_password_status"
+                        android:layout_toRightOf="@id/login_password_lable"
+                        android:background="@android:color/transparent"
+                        android:hint="请填写密码"
+                        android:inputType="@{passwordViewModel.inputType}"
+                        android:maxLines="1"
+                        android:padding="10dp"
+                        android:text="@={viewModel.password}"
+                        android:textColor="@color/colorTextPrimary"
+                        android:textColorHint="@color/colorTextThirdly"
+                        android:textSize="14sp" />
+
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="#c8c8c8" />
+
+                <TextView
+                    android:id="@+id/login_change_to_verification_code_mode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:background="@drawable/bg_transparent_ripple"
+                    android:clickable="true"
+                    android:padding="10dp"
+                    android:text="验证码登录"
+                    android:textColor="#6e799f"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/login_verification_code_login_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:visibility="invisible">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="验证码登录"
+                    android:textColor="@color/colorTextPrimary"
+                    android:textSize="22sp" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="40dp">
+
+                    <TextView
+                        android:id="@+id/login_verification_code_country_code"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:gravity="center"
+                        android:minWidth="70dp"
+                        android:padding="10dp"
+                        android:text="+86"
+                        android:textColor="@color/colorTextPrimary"
+                        android:textSize="14sp" />
+
+                    <View
+                        android:layout_width="2px"
+                        android:layout_height="28dp"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@id/login_verification_code_country_code"
+                        android:background="#c8c8c8" />
+
+                    <ImageView
+                        android:id="@+id/login_verification_code_phone_clear"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:clickable="true"
+                        android:padding="10dp"
+                        android:src="@mipmap/user_ic_edit_clear"
+                        app:clickCommand="@{smsCodeViewModel.clearPhoneCommand}" />
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_toLeftOf="@id/login_verification_code_phone_clear"
+                        android:layout_toRightOf="@id/login_verification_code_country_code"
+                        android:background="@android:color/transparent"
+                        android:hint="请填写手机号"
+                        android:inputType="number"
+                        android:maxLines="1"
+                        android:padding="10dp"
+                        android:text="@={smsCodeViewModel.phone}"
+                        android:textColor="@color/colorTextPrimary"
+                        android:textColorHint="@color/colorTextThirdly"
+                        android:textSize="14sp" />
+
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2px"
+                    android:background="#c8c8c8" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/login_verification_code_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:gravity="center"
+                        android:minWidth="70dp"
+                        android:padding="10dp"
+                        android:text="验证码"
+                        android:textColor="@color/colorTextPrimary"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/login_get_verification_code"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:gravity="center"
+                        android:minWidth="90dp"
+                        android:padding="10dp"
+                        android:text="@{smsCodeViewModel.smsCodeText}"
+                        android:textColor="@color/colorTextPrimary"
+                        android:textSize="14sp"
+                        app:clickCommand="@{smsCodeViewModel.postCodeCommand}" />
+
+                    <EditText
+                        android:id="@+id/login_verification_code"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_toLeftOf="@id/login_get_verification_code"
+                        android:layout_toRightOf="@id/login_verification_code_label"
+                        android:background="@android:color/transparent"
+                        android:hint="请填写验证码"
+                        android:inputType="number"
+                        android:maxLines="1"
+                        android:padding="10dp"
+                        android:text="@={viewModel.verificationCode}"
+                        android:textColor="@color/colorTextPrimary"
+                        android:textColorHint="@color/colorTextThirdly"
+                        android:textSize="14sp" />
+
+                    <View
+                        android:layout_width="2px"
+                        android:layout_height="28dp"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@id/login_verification_code"
+                        android:background="#c8c8c8" />
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2px"
+                    android:background="#c8c8c8" />
+
+                <TextView
+                    android:id="@+id/login_change_to_password_mode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:background="@drawable/bg_transparent_ripple"
+                    android:clickable="true"
+                    android:padding="10dp"
+                    android:text="手机号登录"
+                    android:textColor="#6e799f"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/login_login"
+            style="@style/AppTheme.Button.Login"
+            android:layout_below="@id/login_container"
+            android:text="登录"
+            app:clickCommand="@{viewModel.loginCommand}" />
+
+
+        <TextView
+            android:id="@+id/login_reset_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/bg_transparent_ripple"
+            android:clickable="true"
+            android:padding="10dp"
+            android:text="忘记密码"
+            android:textColor="#6e799f"
+            android:textSize="14sp" />
+
+    </RelativeLayout>
+</layout>

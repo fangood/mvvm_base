@@ -1,0 +1,60 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.zj.th.contacts.ContactsSubViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.zj.th.contacts.ContactsSubFragment">
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/contacts_sub_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:itemBinding="@{viewModel.itemBinding}"
+            app:items="@{viewModel.items}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+        <TextView
+            android:id="@+id/contacts_sub_letter_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#ebebeb"
+            android:paddingLeft="10dp"
+            android:paddingTop="3dp"
+            android:paddingBottom="3dp"
+            tools:text="A" />
+
+        <com.zj.th.base.widget.LetterIndexView
+            android:id="@+id/contacts_sub_letter_index"
+            android:layout_width="15dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:background="@android:color/transparent" />
+
+        <TextView
+            android:id="@+id/contacts_sub_hit_letter"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/contacts_bg_hit_letter"
+            android:gravity="center"
+            android:text="E"
+            android:textColor="@android:color/white"
+            android:textSize="40dp"
+            android:visibility="invisible" />
+
+
+    </RelativeLayout>
+</layout>

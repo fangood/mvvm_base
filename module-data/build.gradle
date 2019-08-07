@@ -1,0 +1,140 @@
+apply plugin: 'com.android.library'
+
+def testServerPublicKey = "\"-----BEGIN CERTIFICATE-----\\n\"+\n" +
+        "\"MIID7zCCAtegAwIBAgIJALJb8H7TndMIMA0GCSqGSIb3DQEBCwUAMIGNMQswCQYD\\n\"+\n" +
+        "\"VQQGEwJDTjERMA8GA1UECAwIU2hhbmdoYWkxETAPBgNVBAcMCFNoYW5naGFpMQ4w\\n\"+\n" +
+        "\"DAYDVQQKDAVxazM2NTEOMAwGA1UECwwFcWszNjUxFjAUBgNVBAMMDXd3dy5xazM2\\n\"+\n" +
+        "\"NS5jb20xIDAeBgkqhkiG9w0BCQEWETEwMzc1NTUwMzVAcXEuY29tMB4XDTE4MDYx\\n\"+\n" +
+        "\"MjA4NTQyOFoXDTI4MDYwOTA4NTQyOFowgY0xCzAJBgNVBAYTAkNOMREwDwYDVQQI\\n\"+\n" +
+        "\"DAhTaGFuZ2hhaTERMA8GA1UEBwwIU2hhbmdoYWkxDjAMBgNVBAoMBXFrMzY1MQ4w\\n\"+\n" +
+        "\"DAYDVQQLDAVxazM2NTEWMBQGA1UEAwwNd3d3LnFrMzY1LmNvbTEgMB4GCSqGSIb3\\n\"+\n" +
+        "\"DQEJARYRMTAzNzU1NTAzNUBxcS5jb20wggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAw\\n\"+\n" +
+        "\"ggEKAoIBAQDLL8YNEtbjsyP7K9AwbYOq7ReqB2sgQYP1JbA2ZTyJYYsyK1j/jqK3\\n\"+\n" +
+        "\"BdlR1sQdBUXdd7JL3dkEoPZyx/uXMnDBb9dGl+NdRPNlqiQiGeTShkMp5Tygc9HG\\n\"+\n" +
+        "\"/obcVo6dHCprBirmYspv/VwlnOf6yVYds/PUfZP4p1utcfAmITLyHcM7b8lWS1OZ\\n\"+\n" +
+        "\"Ej5rxcnwnNVW+LFgfQDjsnlynownfbZox93pRJVFWAGmb2DPQK+9Urgr7EUbw3op\\n\"+\n" +
+        "\"hK8UkWk1Z40L202wnIPc/B0Cb3cySSELW3CsH3/uHoCf1kPsO0utgI+FaSVPqlLW\\n\"+\n" +
+        "\"mHBWAEcyYFbNXnMzBq39MF+ed0hiFRmRAgMBAAGjUDBOMB0GA1UdDgQWBBS10yL7\\n\"+\n" +
+        "\"t4599mSipQLgLGAnQF7U+zAfBgNVHSMEGDAWgBS10yL7t4599mSipQLgLGAnQF7U\\n\"+\n" +
+        "\"+zAMBgNVHRMEBTADAQH/MA0GCSqGSIb3DQEBCwUAA4IBAQC/fm/YkXe5+BRdQL2W\\n\"+\n" +
+        "\"q/b0w1cM+akkz5nzk4Cfq4sCcRbnv7tjrHin4JXi6BuzTuMVhF1sp9MofZkqxLud\\n\"+\n" +
+        "\"DHLhWuOfAvVSig1YyZTucCyK4K5u04yMBTroSHjnDApkH6eovEJmwgLv4inIQBNg\\n\"+\n" +
+        "\"CUkc+vnSGg3ysU3tVQQ5bd/YczB35wjFyTA3iPeA+Uo9Dsbd0+2bA2XqP7//hYcm\\n\"+\n" +
+        "\"X9CyEtfoxYZR79KLB+bPIbeeWb98hi4FskMx3pDxQX37IpxcNd3+DS7zse+r7dqi\\n\"+\n" +
+        "\"PpeXK/epDQdwFESamAvXD2XeNEozi3rwAsFSOpSWkayIGj1rX+WZLULb7wqfH5yX\\n\"+\n" +
+        "\"HKFG\\n\"+\n" +
+        "\"-----END CERTIFICATE-----\\n\""
+def releaseServerPublicKey = "\"-----BEGIN CERTIFICATE-----\\n\"+\n" +
+        "\"MIIEizCCA3OgAwIBAgIQBUb+GCP34ZQdo5/OFMRhczANBgkqhkiG9w0BAQsFADBh\\n\"+\n" +
+        "\"MQswCQYDVQQGEwJVUzEVMBMGA1UEChMMRGlnaUNlcnQgSW5jMRkwFwYDVQQLExB3\\n\"+\n" +
+        "\"d3cuZGlnaWNlcnQuY29tMSAwHgYDVQQDExdEaWdpQ2VydCBHbG9iYWwgUm9vdCBD\\n\"+\n" +
+        "\"QTAeFw0xNzExMDYxMjIzNDVaFw0yNzExMDYxMjIzNDVaMF4xCzAJBgNVBAYTAlVT\\n\"+\n" +
+        "\"MRUwEwYDVQQKEwxEaWdpQ2VydCBJbmMxGTAXBgNVBAsTEHd3dy5kaWdpY2VydC5j\\n\"+\n" +
+        "\"b20xHTAbBgNVBAMTFEdlb1RydXN0IFJTQSBDQSAyMDE4MIIBIjANBgkqhkiG9w0B\\n\"+\n" +
+        "\"AQEFAAOCAQ8AMIIBCgKCAQEAv4rRY03hGOqHXegWPI9/tr6HFzekDPgxP59FVEAh\\n\"+\n" +
+        "\"150Hm8oDI0q9m+2FAmM/n4W57Cjv8oYi2/hNVEHFtEJ/zzMXAQ6CkFLTxzSkwaEB\\n\"+\n" +
+        "\"2jKgQK0fWeQz/KDDlqxobNPomXOMJhB3y7c/OTLo0lko7geG4gk7hfiqafapa59Y\\n\"+\n" +
+        "\"rXLIW4dmrgjgdPstU0Nigz2PhUwRl9we/FAwuIMIMl5cXMThdSBK66XWdS3cLX18\\n\"+\n" +
+        "\"4ND+fHWhTkAChJrZDVouoKzzNYoq6tZaWmyOLKv23v14RyZ5eqoi6qnmcRID0/i6\\n\"+\n" +
+        "\"U9J5nL1krPYbY7tNjzgC+PBXXcWqJVoMXcUw/iBTGWzpwwIDAQABo4IBQDCCATww\\n\"+\n" +
+        "\"HQYDVR0OBBYEFJBY/7CcdahRVHex7fKjQxY4nmzFMB8GA1UdIwQYMBaAFAPeUDVW\\n\"+\n" +
+        "\"0Uy7ZvCj4hsbw5eyPdFVMA4GA1UdDwEB/wQEAwIBhjAdBgNVHSUEFjAUBggrBgEF\\n\"+\n" +
+        "\"BQcDAQYIKwYBBQUHAwIwEgYDVR0TAQH/BAgwBgEB/wIBADA0BggrBgEFBQcBAQQo\\n\"+\n" +
+        "\"MCYwJAYIKwYBBQUHMAGGGGh0dHA6Ly9vY3NwLmRpZ2ljZXJ0LmNvbTBCBgNVHR8E\\n\"+\n" +
+        "\"OzA5MDegNaAzhjFodHRwOi8vY3JsMy5kaWdpY2VydC5jb20vRGlnaUNlcnRHbG9i\\n\"+\n" +
+        "\"YWxSb290Q0EuY3JsMD0GA1UdIAQ2MDQwMgYEVR0gADAqMCgGCCsGAQUFBwIBFhxo\\n\"+\n" +
+        "\"dHRwczovL3d3dy5kaWdpY2VydC5jb20vQ1BTMA0GCSqGSIb3DQEBCwUAA4IBAQAw\\n\"+\n" +
+        "\"8YdVPYQI/C5earp80s3VLOO+AtpdiXft9OlWwJLwKlUtRfccKj8QW/Pp4b7h6QAl\\n\"+\n" +
+        "\"ufejwQMb455OjpIbCZVS+awY/R8pAYsXCnM09GcSVe4ivMswyoCZP/vPEn/LPRhH\\n\"+\n" +
+        "\"hdgUPk8MlD979RGoUWz7qGAwqJChi28uRds3thx+vRZZIbEyZ62No0tJPzsSGSz8\\n\"+\n" +
+        "\"nQ//jP8BIwrzBAUH5WcBAbmvgWfrKcuv+PyGPqRcc4T55TlzrBnzAzZ3oClo9fTv\\n\"+\n" +
+        "\"O9PuiHMKrC6V6mgi0s2sa/gbXlPCD9Z24XUMxJElwIVTDuKB0Q4YMMlnpN/QChJ4\\n\"+\n" +
+        "\"B0AFsQ+DU0NCO+f78Xf7\\n\"+\n" +
+        "\"-----END CERTIFICATE-----\""
+
+android {
+
+    compileSdkVersion versions.compileSdk
+
+    defaultConfig {
+        minSdkVersion versions.minSdk
+        targetSdkVersion versions.targetSdk
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    compileOptions {
+        targetCompatibility versions.targetCompatibility
+        sourceCompatibility versions.sourceCompatibility
+    }
+    //int DEBUG = 0;//0测试，1仿真，2正式, 3开发
+    buildTypes {
+        debug {
+
+            buildConfigField "String", "BASE_URL", '"http://192.168.1.119:8000"'
+            //是否可抓包
+            buildConfigField "boolean", "PROXY_ENABLE", 'true'
+            buildConfigField "String", "SERVER_PUBLIC_KEY", "$testServerPublicKey"
+            //极光（外网）
+            buildConfigField "String", "APP_PUSH_URL", '"http://222.66.113.90:58706/qkMessagePushProvider"'
+        }
+        fortest {
+            buildConfigField "boolean", "PROXY_ENABLE", 'true'
+            buildConfigField "String", "SERVER_PUBLIC_KEY", "$testServerPublicKey"
+            buildConfigField "String", "BASE_URL", '"http://192.168.1.147:8000"'
+            //极光（外网）
+            buildConfigField "String", "APP_PUSH_URL", '"http://222.66.113.90:58706/qkMessagePushProvider"'
+            consumerProguardFiles 'proguard-rules.pro'
+        }
+        simulation {
+            buildConfigField "boolean", "PROXY_ENABLE", 'false'
+            buildConfigField "String", "SERVER_PUBLIC_KEY", "$testServerPublicKey"
+            buildConfigField "String", "BASE_URL", '"http://172.17.0.64:8000"'
+            //极光（外网）
+            buildConfigField "String", "APP_PUSH_URL", '"http://192.168.1.156:8585/qkMessagePushProvider"'
+            consumerProguardFiles 'proguard-rules.pro'
+        }
+        release {
+            buildConfigField "boolean", "PROXY_ENABLE", 'false'
+            buildConfigField "String", "SERVER_PUBLIC_KEY", "$releaseServerPublicKey"
+            buildConfigField "String", "BASE_URL", '"http://192.168.1.147:8000"'
+            //极光（外网）
+            buildConfigField "String", "APP_PUSH_URL", '"http://58.215.175.243:8585/qkMessagePushProvider"'
+            consumerProguardFiles 'proguard-rules.pro'
+        }
+    }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+}
+
+dependencies {
+    api fileTree(dir: 'libs', include: ['*.jar'])
+    // Test
+    testImplementation "junit:junit:$versions.junit"
+    androidTestImplementation "androidx.test:runner:$versions.androidx.runner"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$versions.androidx.espresso"
+
+    api ("androidx.appcompat:appcompat:$versions.androidx.appcompat")
+            {
+                exclude group: 'androidx.core'
+            }
+    // Architecture Components
+    api ("androidx.room:room-runtime:$versions.androidx.room"){
+        exclude group: 'androidx.core'
+    }
+    annotationProcessor "androidx.room:room-compiler:$versions.androidx.room"
+    api "androidx.room:room-rxjava2:$versions.androidx.room"
+    // RxJava & RxAndroid
+    api "io.reactivex.rxjava2:rxjava:$versions.rxjava"
+    api "io.reactivex.rxjava2:rxandroid:$versions.rxandroid"
+    // Retrofit
+    api "com.squareup.retrofit2:retrofit:2.4.0"
+    api 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
+    api "com.google.code.gson:gson:$versions.gson"
+}

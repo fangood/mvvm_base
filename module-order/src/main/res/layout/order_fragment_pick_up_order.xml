@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.zj.th.order.PickUpOrderViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".pickup.PickUpOrderFragment">
+
+        <com.zj.th.base.widget.TitleBar
+            android:id="@+id/pick_up_order_title_bar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/title_height"
+            android:background="@color/colorPrimary"
+            android:elevation="5dp"
+            app:centerTextSize="15sp"
+            app:leftMinWidth="@dimen/title_height"
+            app:leftType="none"
+            app:rightIcon="@mipmap/order_ic_pick_up_map"
+            app:rightMinWidth="@dimen/title_height"
+            app:rightType="icon">
+
+            <TextView
+                android:id="@+id/title_bar_role_picker"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:drawablePadding="5dp"
+                android:drawableRight="@mipmap/order_ic_role_picker_drop_down"
+                android:gravity="center"
+                android:minWidth="@dimen/title_height"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="@{viewModel.positionName}"
+                android:textColor="@color/colorAccent"
+                android:textSize="14sp"
+                tools:text="角色" />
+
+            <EditText
+                android:id="@+id/pick_up_order_search"
+                android:layout_width="match_parent"
+                android:layout_height="28dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_toLeftOf="@id/title_bar_right"
+                android:layout_toRightOf="@id/title_bar_role_picker"
+                android:background="@drawable/order_bg_main_search"
+                android:drawableLeft="@mipmap/order_ic_search"
+                android:drawablePadding="5dp"
+                android:focusable="false"
+                android:gravity="left|center_vertical"
+                android:hint="仅支持行政区搜索"
+                android:inputType="none"
+                android:paddingLeft="14dp"
+                android:paddingRight="14dp"
+                android:text="@={viewModel.keyword}"
+                android:textColor="#ECEFF3"
+                android:textColorHint="#ECEFF3"
+                android:textSize="14sp" />
+
+        </com.zj.th.base.widget.TitleBar>
+
+        <FrameLayout
+            android:id="@+id/pick_up_order_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </FrameLayout>
+
+    </LinearLayout>
+</layout>

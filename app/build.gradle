@@ -1,0 +1,117 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.alibaba.arouter'
+
+android {
+
+    compileSdkVersion versions.compileSdk
+
+    signingConfigs {
+        debug {
+            keyAlias 'debug'
+            keyPassword '123456'
+            storeFile file('keystore/debug.jks')
+            storePassword '123456'
+        }
+        release {
+            keyAlias 'debug'
+            keyPassword '123456'
+            storeFile file('keystore/debug.jks')
+            storePassword '123456'
+        }
+    }
+
+    defaultConfig {
+        applicationId "com.zj.th"
+        minSdkVersion versions.minSdk
+        targetSdkVersion versions.targetSdk
+        versionCode 2030000
+        versionName '2.3.0.0'
+
+        multiDexEnabled true
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        ndk {
+            abiFilters "armeabi-v7a", "armeabi"
+        }
+        // 默认签名
+        signingConfig signingConfigs.debug
+
+        // ARouter
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
+
+    }
+
+    buildTypes {
+        // 开发
+        debug {
+            signingConfig signingConfigs.debug
+            debuggable true
+        }
+        // 测试
+        fortest {
+            signingConfig signingConfigs.release
+            debuggable true
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        // 仿真
+        simulation {
+            signingConfig signingConfigs.release
+            debuggable true
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        // 正式
+        release {
+            signingConfig signingConfigs.release
+            debuggable false
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+
+    dataBinding {
+        enabled true
+    }
+
+    compileOptions {
+        targetCompatibility versions.targetCompatibility
+        sourceCompatibility versions.sourceCompatibility
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+
+    applicationVariants.all { variant ->
+        variant.outputs.all {
+            outputFileName = getProjctName() + "_${variant.name}_V${variant.versionName}_${variant.versionCode}.apk"
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    // Test
+    testImplementation "junit:junit:$versions.junit"
+    androidTestImplementation "androidx.test:runner:$versions.androidx.runner"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$versions.androidx.espresso"
+    // Modules
+    implementation project(':module-base')
+    implementation project(':module-contacts')
+    implementation project(':module-order')
+    implementation project(':module-user')
+    // ARouter
+    annotationProcessor "com.alibaba:arouter-compiler:$versions.arouter.compiler"
+    //强制统一使用一个版本
+    configurations.all {
+        resolutionStrategy.force 'androidx.core:core:1.1.0-rc02'
+        resolutionStrategy.force 'androidx.recyclerview:recyclerview:1.1.0-beta01'
+    }
+}

@@ -1,0 +1,66 @@
+apply plugin: 'com.android.library'
+
+android {
+
+    compileSdkVersion versions.compileSdk
+
+    defaultConfig {
+        minSdkVersion versions.minSdk
+        targetSdkVersion versions.targetSdk
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        debug {
+        }
+        fortest {
+        }
+        simulation {
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    dataBinding {
+        enabled true
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    // Test
+    testImplementation "junit:junit:$versions.junit"
+    androidTestImplementation "androidx.test:runner:$versions.androidx.runner"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$versions.androidx.espresso"
+
+    api ("androidx.appcompat:appcompat:$versions.androidx.appcompat"){
+        exclude group: 'androidx.core'
+    }
+    api ("androidx.legacy:legacy-support-v4:$versions.androidx.legacy"){
+        exclude group: 'androidx.core'
+    }
+    api "androidx.constraintlayout:constraintlayout:$versions.androidx.constraintlayout"
+    api ("com.google.android.material:material:$versions.material"){
+        exclude group: 'androidx.core'
+    }
+
+    // Architecture Components
+    api "androidx.lifecycle:lifecycle-extensions:$versions.androidx.lifecycle"
+    annotationProcessor "androidx.lifecycle:lifecycle-compiler:$versions.androidx.lifecycle"
+    // Modules
+    api project(':module-data')
+    // Others V1.0.0.0
+    api "com.github.bumptech.glide:glide:$versions.glide"
+    api ('me.tatarka.bindingcollectionadapter2:bindingcollectionadapter:3.0.0-beta3'){
+        exclude group: 'androidx.core'
+    }
+    api ('me.tatarka.bindingcollectionadapter2:bindingcollectionadapter-recyclerview:3.0.0-beta3'){
+        exclude group: 'androidx.recyclerview'
+    }
+}

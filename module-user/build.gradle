@@ -1,0 +1,62 @@
+apply plugin: 'com.android.library'
+
+android {
+
+    compileSdkVersion versions.compileSdk
+
+    defaultConfig {
+        minSdkVersion versions.minSdk
+        targetSdkVersion versions.targetSdk
+        versionCode 1
+        versionName "1.0"
+
+        multiDexEnabled true
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        // ARouter
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName().replace('module-', '')]
+            }
+        }
+    }
+
+    buildTypes {
+        debug {
+        }
+        fortest {
+        }
+        simulation {
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    dataBinding {
+        enabled true
+    }
+
+    compileOptions {
+        targetCompatibility versions.targetCompatibility
+        sourceCompatibility versions.sourceCompatibility
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    testImplementation "junit:junit:$versions.junit"
+    androidTestImplementation "androidx.test:runner:$versions.androidx.runner"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$versions.androidx.espresso"
+    // ARouter
+    annotationProcessor "com.alibaba:arouter-compiler:$versions.arouter.compiler"
+    // Modules
+    implementation project(':module-base')
+
+}

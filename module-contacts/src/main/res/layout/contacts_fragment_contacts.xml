@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.zj.th.contacts.ContactsViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:splitMotionEvents="false"
+        tools:context=".ContactsFragment">
+
+        <com.zj.th.base.widget.TitleBar
+            android:id="@+id/contacts_title"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/title_height"
+            android:background="@color/colorPrimary"
+            app:centerText="通讯录"
+            app:centerTextSize="18sp"
+            app:leftIcon="@mipmap/contacts_ic_scan"
+            app:leftMinWidth="@dimen/title_height"
+            app:leftType="icon"
+            app:rightIcon="@mipmap/contacts_ic_add"
+            app:rightMinWidth="@dimen/title_height"
+            app:rightType="icon">
+
+        </com.zj.th.base.widget.TitleBar>
+
+        <RelativeLayout
+            android:id="@+id/contacts_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/contacts_title"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp">
+
+            <TextView
+                android:id="@+id/add_contacts_search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:padding="10dp"
+                android:text="搜索"
+                android:textSize="14sp" />
+
+            <EditText
+                android:id="@+id/add_contacts_keyword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="8dp"
+                android:layout_toLeftOf="@id/add_contacts_search"
+                android:background="@drawable/contacts_bg_add_contacts_search"
+                android:drawableLeft="@mipmap/contacts_ic_search"
+                android:drawablePadding="5dp"
+                android:hint="姓名或手机号搜索"
+                android:padding="8dp"
+                android:singleLine="true"
+                android:text="@={viewModel.keyword}"
+                android:textColor="@color/colorTextPrimary"
+                android:textColorHint="@color/colorTextThirdly"
+                android:textSize="14sp" />
+        </RelativeLayout>
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/contacts_tab"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@id/contacts_search"
+            android:background="@android:color/white"
+            android:textSize="12sp"
+            app:tabGravity="center"
+            app:tabIndicatorColor="@color/colorAccent"
+            app:tabIndicatorHeight="2dp"
+            app:tabMode="scrollable"
+            app:tabSelectedTextColor="@color/colorAccent"
+            app:tabTextAppearance="@style/TextAppearance.Design.Tab"
+            app:tabTextColor="@color/colorTextPrimary" />
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/contacts_viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/contacts_tab">
+
+        </androidx.viewpager.widget.ViewPager>
+
+        <RelativeLayout
+            android:id="@+id/contacts_no_contacts"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/contacts_title"
+            android:background="@color/colorWindowBackground"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:drawablePadding="26dp"
+                android:drawableTop="@mipmap/contacts_ic_no_contacts"
+                android:gravity="center"
+                android:text="您目前还没有好友，请点击右上角添加好友"
+                android:textSize="14sp" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+</layout>

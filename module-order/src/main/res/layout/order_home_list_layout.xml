@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+    </data>
+
+    <RelativeLayout
+        android:id="@+id/ll_main"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_height"
+        android:background="@color/colorPrimary">
+
+        <ImageView
+            android:id="@+id/order_menu"
+            android:layout_width="@dimen/size_20"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/medium_margin"
+            android:layout_marginLeft="@dimen/dimens_8"
+            android:src="@drawable/ic_menu" />
+
+        <RelativeLayout
+            android:id="@+id/relat_search"
+            android:layout_toRightOf="@id/order_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:background="@color/colorPrimary"
+            android:padding="@dimen/dimens_4">
+
+            <EditText
+                android:id="@+id/et_search"
+                android:layout_width="match_parent"
+                android:layout_height="26dp"
+                android:layout_centerVertical="true"
+                android:layout_gravity="clip_vertical"
+                android:layout_marginRight="@dimen/dimens_48"
+                android:background="@drawable/order_bg_main_search"
+                android:hint="搜搜看"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/dimens_24"
+                android:textColor="@android:color/white"
+                android:textColorHint="@android:color/white"
+                android:textSize="@dimen/size_12" />
+
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/dimens_8"
+                android:src="@mipmap/order_ic_search" />
+
+            <ImageView
+                android:id="@+id/iv_clean"
+                android:layout_width="@dimen/dimens_16"
+                android:layout_height="@dimen/dimens_16"
+                android:layout_marginRight="@dimen/dimens_12"
+                android:visibility="gone"
+                android:layout_toLeftOf="@+id/tv_search"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_cancel_black_24dp"/>
+
+            <TextView
+                android:id="@+id/tv_search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_margin="@dimen/dimens_6"
+                android:text="搜索"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/size_16" />
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+
+</layout>

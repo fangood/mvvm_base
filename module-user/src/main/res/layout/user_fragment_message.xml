@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View" />
+
+        <variable
+            name="messages"
+            type="com.zj.th.user.message.MessageViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".message.MessageFragment">
+
+        <com.zj.th.base.widget.TitleBar
+            android:id="@+id/title_bar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/title_height"
+            android:background="@color/colorPrimary"
+            app:centerText="消息中心"
+            app:centerTextColor="@color/color_bg"
+            app:rightMinWidth="@dimen/crop__bar_height"
+            app:rightText="一键已读   "
+            app:rightType="text" />
+
+        <TextView
+            android:id="@+id/sans_messages"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:drawableTop="@mipmap/order_ic_no_order"
+            android:drawablePadding="5dp"
+            android:gravity="center"
+            android:text="暂无消息"
+            android:textColor="@color/colorTextThirdly"
+            android:visibility="gone" />
+
+        <com.jcodecraeer.xrecyclerview.XRecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/title_bar" />
+    </RelativeLayout>
+
+</layout>

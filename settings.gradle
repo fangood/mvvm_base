@@ -1,0 +1,8 @@
+include ':app',
+        ':databinding-mvvm',
+        ':module-base',
+        ':module-contacts',
+        ':module-data',
+        ':module-order',
+        ':module-user',
+        ':xrecyclerview'

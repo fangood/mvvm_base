@@ -1,0 +1,13 @@
+<resources>
+
+    <dimen name="dimens_8">8dp</dimen>
+    <dimen name="dimens_12">12dp</dimen>
+    <dimen name="dimens_16">16dp</dimen>
+    <dimen name="dimens_36">36dp</dimen>
+    <dimen name="dimens_68">68dp</dimen>
+
+    <dimen name="size_12">12sp</dimen>
+    <dimen name="size_16">16sp</dimen>
+    <dimen name="crop__bar_height">56dp</dimen>
+
+</resources>

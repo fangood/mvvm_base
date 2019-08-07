@@ -1,0 +1,100 @@
+apply plugin: 'com.android.library'
+
+android {
+
+    compileSdkVersion versions.compileSdk
+
+    defaultConfig {
+        minSdkVersion versions.minSdk
+        targetSdkVersion versions.targetSdk
+        versionCode 1
+        versionName "1.0"
+
+        multiDexEnabled true
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        // ARouter
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName().replace('module-', '')]
+            }
+        }
+    }
+
+    buildTypes {
+        debug {
+        }
+        fortest {
+        }
+        simulation {
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    dataBinding {
+        enabled true
+    }
+
+    compileOptions {
+        targetCompatibility versions.targetCompatibility
+        sourceCompatibility versions.sourceCompatibility
+    }
+
+    sourceSets {
+        main {
+            jniLibs.srcDir 'libs'
+        }
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+
+
+}
+
+repositories { flatDir { dirs 'libs' } }
+
+
+dependencies {
+    api fileTree(include: ['*.jar'], dir: 'libs')
+    // Test
+    testImplementation "junit:junit:$versions.junit"
+    androidTestImplementation "androidx.test:runner:$versions.androidx.runner"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$versions.androidx.espresso"
+
+    // Support Libraries
+    api ("androidx.appcompat:appcompat:$versions.androidx.appcompat")
+            {
+                exclude group: 'androidx.core'
+            }
+    api 'androidx.cardview:cardview:1.0.0'
+    api ("androidx.legacy:legacy-support-v4:$versions.androidx.legacy"){
+        exclude group: 'androidx.core'
+    }
+    api 'androidx.dynamicanimation:dynamicanimation:1.1.0-alpha02'
+    api "androidx.constraintlayout:constraintlayout:$versions.androidx.constraintlayout"
+
+    implementation "androidx.multidex:multidex:$versions.androidx.multidex"
+    // RxJava & RxAndroid
+    api "io.reactivex.rxjava2:rxjava:$versions.rxjava"
+    api "io.reactivex.rxjava2:rxandroid:$versions.rxandroid"
+    // Modules
+    api project(':module-data')
+    api project(':databinding-mvvm')
+    api project(':xrecyclerview')
+    // ARouter
+    api "com.alibaba:arouter-api:$versions.arouter.api"
+    annotationProcessor "com.alibaba:arouter-compiler:$versions.arouter.compiler"
+    // Others
+    // 权限 https://github.com/yanzhenjie/AndPermission
+    api 'com.yanzhenjie:permission:1.1.2'
+    api 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.5@aar'
+    api 'com.readystatesoftware.systembartint:systembartint:1.0.3'
+    implementation 'com.davemorrissey.labs:subsampling-scale-image-view:3.10.0'
+    implementation 'com.github.bumptech.glide:okhttp3-integration:1.4.0@aar'
+}

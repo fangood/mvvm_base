@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.zj.th.user.register.RegisterActivity">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.zj.th.user.register.RegisterViewModel" />
+
+        <variable
+            name="smsCodeViewModel"
+            type="com.zj.th.user.register.SmsCodeViewModel" />
+
+        <variable
+            name="passwordViewModel"
+            type="com.zj.th.user.register.PasswordViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        android:orientation="vertical">
+
+        <com.zj.th.base.widget.TitleBar
+            android:id="@+id/register_title"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/title_height"
+            android:layout_alignParentTop="true"
+            android:background="@android:color/transparent"
+            app:leftIcon="@mipmap/user_ic_close"
+            app:leftMinWidth="@dimen/title_height"
+            app:leftType="icon">
+
+        </com.zj.th.base.widget.TitleBar>
+
+        <LinearLayout
+            android:id="@+id/register_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/register_title"
+            android:layout_marginTop="60dp"
+            android:orientation="vertical"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="手机号注册"
+                android:textColor="@color/colorTextPrimary"
+                android:textSize="22sp" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:id="@+id/register_step1_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="40dp">
+
+                        <TextView
+                            android:id="@+id/register_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:gravity="center"
+                            android:minWidth="70dp"
+                            android:padding="10dp"
+                            android:text="姓名"
+                            android:textColor="@color/colorTextPrimary"
+                            android:textSize="14sp" />
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_toRightOf="@id/register_name"
+                            android:background="@android:color/transparent"
+                            android:hint="请输入"
+                            android:inputType="text"
+                            android:maxLines="1"
+                            android:padding="10dp"
+                            android:text="@={viewModel.name}"
+                            android:textColor="@color/colorTextPrimary"
+                            android:textColorHint="@color/colorTextThirdly"
+                            android:textSize="14sp" />
+
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2px"
+                        android:background="#c8c8c8" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/register_verification_code_country_code"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:gravity="center"
+                            android:minWidth="70dp"
+                            android:padding="10dp"
+                            android:text="+86"
+                            android:textColor="@color/colorTextPrimary"
+                            android:textSize="14sp" />
+
+                        <View
+                            android:layout_width="2px"
+                            android:layout_height="28dp"
+                            android:layout_centerVertical="true"
+                            android:layout_toRightOf="@id/register_verification_code_country_code"
+                            android:background="#c8c8c8" />
+
+                        <ImageView
+                            android:id="@+id/register_verification_code_phone_clear"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:clickable="true"
+                            android:padding="10dp"
+                            android:src="@mipmap/user_ic_edit_clear"
+                            app:clickCommand="@{smsCodeViewModel.clearPhoneCommand}" />
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_toLeftOf="@id/register_verification_code_phone_clear"
+                            android:layout_toRightOf="@id/register_verification_code_country_code"
+                            android:background="@android:color/transparent"
+                            android:hint="请填写手机号"
+                            android:inputType="number"
+                            android:maxLines="1"
+                            android:padding="10dp"
+                            android:text="@={smsCodeViewModel.phone}"
+                            android:textColor="@color/colorTextPrimary"
+                            android:textColorHint="@color/colorTextThirdly"
+                            android:textSize="14sp" />
+
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2px"
+                        android:background="#c8c8c8" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/register_step2_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="invisible">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:gravity="bottom"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="已发送短信至您的手机"
+                            android:textColor="@color/colorTextSecondary"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:text="@{viewModel.phone}"
+                            android:textColor="@color/colorTextPrimary"
+                            android:textSize="16sp"
+                            tools:text="130 0000 0000" />
+                    </LinearLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="40dp">
+
+                        <TextView
+                            android:id="@+id/register_verification_code_label"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:gravity="center"
+                            android:minWidth="70dp"
+                            android:padding="10dp"
+                            android:text="验证码"
+                            android:textColor="@color/colorTextPrimary"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/register_get_verification_code"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:gravity="center"
+                            android:minWidth="90dp"
+                            android:padding="10dp"
+                            android:text="@{smsCodeViewModel.smsCodeText}"
+                            android:textColor="@color/colorTextPrimary"
+                            android:textSize="14sp"
+                            app:clickCommand="@{smsCodeViewModel.postCodeCommand}" />
+
+                        <EditText
+                            android:id="@+id/register_verification_code"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_toLeftOf="@id/register_get_verification_code"
+                            android:layout_toRightOf="@id/register_verification_code_label"
+                            android:background="@android:color/transparent"
+                            android:hint="请填写验证码"
+                            android:inputType="number"
+                            android:maxLines="1"
+                            android:padding="10dp"
+                            android:text="@={viewModel.smsCode}"
+                            android:textColor="@color/colorTextPrimary"
+                            android:textColorHint="@color/colorTextThirdly"
+                            android:textSize="14sp" />
+
+                        <View
+                            android:layout_width="2px"
+                            android:layout_height="28dp"
+                            android:layout_centerVertical="true"
+                            android:layout_toRightOf="@id/register_verification_code"
+                            android:background="#c8c8c8" />
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2px"
+                        android:background="#c8c8c8" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/register_password_label"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:gravity="center"
+                            android:minWidth="70dp"
+                            android:padding="10dp"
+                            android:text="密码"
+                            android:textColor="@color/colorTextPrimary"
+                            android:textSize="14sp" />
+
+                        <CheckBox
+                            android:id="@+id/register_password_status"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:button="@null"
+                            android:checked="@={passwordViewModel.visible}"
+                            android:drawableLeft="@drawable/user_bg_cb_password_status_selector"
+                            android:padding="10dp" />
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_toLeftOf="@id/register_password_status"
+                            android:layout_toRightOf="@id/register_password_label"
+                            android:background="@android:color/transparent"
+                            android:hint="请输入8~20位数字和字母大小写"
+                            android:inputType="@{passwordViewModel.inputType}"
+                            android:maxLines="1"
+                            android:padding="10dp"
+                            android:text="@={viewModel.password}"
+                            android:textColor="@color/colorTextPrimary"
+                            android:textColorHint="@color/colorTextThirdly"
+                            android:textSize="14sp" />
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2px"
+                        android:background="#c8c8c8" />
+                </LinearLayout>
+
+            </FrameLayout>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/register_next_step"
+            style="@style/AppTheme.Button.Login"
+            android:layout_below="@id/register_container"
+            android:text="@{viewModel.nextStepName}" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="10dp"
+                android:paddingLeft="10dp"
+                android:paddingTop="10dp"
+                android:text="注册即表示同意"
+                android:textColor="@color/colorTextSecondary"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/register_agreement"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_transparent_ripple"
+                android:clickable="true"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:text="《用户注册协议》"
+                android:textColor="#6e799f" />
+        </LinearLayout>
+
+    </RelativeLayout>
+</layout>

@@ -1,0 +1,30 @@
+<resources>
+
+    <style name="AppTheme.Button.Login" parent="AppTheme.Button">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:layout_marginLeft">20dp</item>
+        <item name="android:layout_marginRight">20dp</item>
+        <item name="android:layout_marginTop">40dp</item>
+    </style>
+
+    <style name="user_center_item_tag" parent="user_center_item_tag_no_arrow">
+        <item name="android:drawableRight">@drawable/ic_chevron_right_black_24dp</item>
+    </style>
+    <style name="user_center_item_tag_no_arrow">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:paddingLeft">15dp</item>
+        <item name="android:paddingRight">15dp</item>
+        <item name="android:paddingTop">18dp</item>
+        <item name="android:paddingBottom">18dp</item>
+        <item name="android:clickable">true</item>
+        <item name="android:background">@drawable/bg_white_ripple</item>
+        <item name="android:drawablePadding">10dp</item>
+        <item name="android:gravity">left</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/colorTextPrimary</item>
+    </style>
+
+</resources>
