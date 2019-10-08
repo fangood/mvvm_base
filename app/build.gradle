@@ -47,7 +47,7 @@ android {
     }
 
     buildTypes {
-        // 开发
+        // 开发dataBinding
         debug {
             signingConfig signingConfigs.debug
             debuggable true

@@ -92,8 +92,7 @@ dependencies {
     annotationProcessor "com.alibaba:arouter-compiler:$versions.arouter.compiler"
     // Others
     // 权限 https://github.com/yanzhenjie/AndPermission
-    api 'com.yanzhenjie:permission:1.1.2'
-    api 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.5@aar'
+    api 'com.yanzhenjie.permission:x:2.0.1'
     api 'com.readystatesoftware.systembartint:systembartint:1.0.3'
     implementation 'com.davemorrissey.labs:subsampling-scale-image-view:3.10.0'
     implementation 'com.github.bumptech.glide:okhttp3-integration:1.4.0@aar'

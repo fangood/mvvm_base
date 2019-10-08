@@ -14,10 +14,8 @@ import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.google.android.material.tabs.TabLayout;
-import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.zj.databinding.adapter.FragmentPagerAdapter;
 import com.zj.databinding.mvvm.view.activity.MvvmActivity;
-import com.zj.th.base.widget.ToastManager;
 import com.zj.th.databinding.ActivityMainBinding;
 
 import java.util.ArrayList;
@@ -39,14 +37,6 @@ public class MainActivity extends MvvmActivity<ActivityMainBinding> implements T
     protected void onCreate(Bundle savedInstanceState) {
         ARouter.getInstance().inject(this);
         super.onCreate(savedInstanceState);
-
-        new RxPermissions(this)
-                .request(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                .subscribe(granted -> {
-                    if (!granted) {
-                        ToastManager.show(this, "请打开文件读写权限");
-                    }
-                });
 
     }
 
