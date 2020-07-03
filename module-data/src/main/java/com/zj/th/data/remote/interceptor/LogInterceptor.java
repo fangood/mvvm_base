@@ -76,6 +76,7 @@ public class LogInterceptor implements Interceptor {
         }
 
         sb.append("\n");
+        Log.d("LogInterceptor",sb.toString());
 
         if (debug) {
             Platform.get().log(Platform.INFO, sb.toString(), null);
